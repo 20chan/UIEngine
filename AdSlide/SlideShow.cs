@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace UIEngine
+namespace AdSlide
 {
-    public partial class Form1 : Form
+    public partial class SlideShow : Form
     {
-        public Form1()
+        public SlideShow()
         {
             InitializeComponent();
         }

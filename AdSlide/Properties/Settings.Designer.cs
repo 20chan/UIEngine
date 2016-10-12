@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UIEngine.Properties
+namespace AdSlide.Properties
 {
 
 
