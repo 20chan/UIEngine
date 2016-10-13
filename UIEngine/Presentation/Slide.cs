@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace UIEngine
+namespace UIEngine.Presentation
 {
-    public interface IAnimation
+    public class Slide
     {
-        void Play();
+
     }
 }
