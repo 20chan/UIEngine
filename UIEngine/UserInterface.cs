@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace UIEngine
 {
@@ -19,7 +17,7 @@ namespace UIEngine
 
         public Fill Fill { get; set; } = Fill.DefaultFill;
         public Fill BackgroundFill { get; set; } = Fill.DefaultBackgroundFill;
-
+        
         public virtual void Draw(Graphics g)
         {
             BackgroundFill.DrawRectangle(g, Bound);

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Timers;
-using System.Linq;
-using System.Drawing;
 
 namespace UIEngine.Animations
 {

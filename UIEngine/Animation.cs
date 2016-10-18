@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace UIEngine
 {
     public abstract class Animation
     {
         public UserInterface Parent { get; private set; }
+        public Trigger.TriggerType TriggerType { get; set; }
         public abstract event Action AnimationEnded;
         
         public uint Duration { get; set; }
