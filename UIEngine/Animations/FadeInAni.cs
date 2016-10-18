@@ -28,7 +28,7 @@ namespace UIEngine.Animations
         private uint _elapsed = 0;
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Parent.Fill.Transparency = Duration / (Duration - _elapsed);
+            Parent.Fill.Transparency = 1.0f - (float)(Duration - _elapsed) / (float)Duration;
             _elapsed += (uint)_timer.Interval;
 
             if (_elapsed == Duration)

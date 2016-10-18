@@ -10,7 +10,7 @@ namespace UIEngine.Fills
             get { return _color; }
             set
             {
-                _pen = new Pen(this.Color);
+                _pen = new Pen(this._color);
                 _color = value;
             }
         }
