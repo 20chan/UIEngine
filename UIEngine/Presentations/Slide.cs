@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace UIEngine
+namespace UIEngine.Presentations
 {
     public class Slide
     {
@@ -27,8 +27,16 @@ namespace UIEngine
             }
         }
 
+        private void SetUIsBeforePlay()
+        {
+            foreach (var ani in Animations)
+                ani.BeforeParent();
+        }
+
         public void SlideBegin()
         {
+            SetAnimationsTrigger();
+            SetUIsBeforePlay();
             if(Animations.Count > 0)
             {
                 if (Animations.First().TriggerType == Trigger.TriggerType.WithPrevious)

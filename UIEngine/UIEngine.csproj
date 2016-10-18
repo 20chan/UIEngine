@@ -49,14 +49,14 @@
     <Compile Include="Fills\SolidFill.cs" />
     <Compile Include="Interfaces\UILabel.cs" />
     <Compile Include="Interfaces\UIPicture.cs" />
-    <Compile Include="Slide.cs" />
+    <Compile Include="Presentations\Presentation.cs" />
+    <Compile Include="Presentations\Slide.cs" />
     <Compile Include="Trigger\TriggerType.cs" />
     <Compile Include="UserInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Effects\" />
-    <Folder Include="Presentation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

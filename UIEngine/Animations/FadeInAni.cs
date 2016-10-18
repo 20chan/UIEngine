@@ -8,10 +8,14 @@ namespace UIEngine.Animations
         public override event Action AnimationEnded;
         private Timer _timer;
 
+        private readonly float originalAlpha;
+
         public FadeInAni(UserInterface parent, uint duration) : base(parent, duration)
         {
             _timer = new Timer(20);
             _timer.Elapsed += _timer_Elapsed;
+
+            originalAlpha = parent.Fill.Transparency;
         }
 
         public override void Play()
@@ -32,6 +36,16 @@ namespace UIEngine.Animations
                 AnimationEnded?.Invoke();
                 _timer.Stop();
             }
+        }
+
+        public override void BeforeParent()
+        {
+            Parent.Fill.Transparency = 0;
+        }
+
+        public override void AfterParent()
+        {
+            Parent.Fill.Transparency = originalAlpha;
         }
     }
 }

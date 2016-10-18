@@ -20,5 +20,14 @@ namespace UIEngine
         {
 
         }
+
+        /// <summary>
+        /// Make parent ui before animation played
+        /// </summary>
+        public abstract void BeforeParent();
+        /// <summary>
+        /// Make parent ui after animation played
+        /// </summary>
+        public abstract void AfterParent();
     }
 }
