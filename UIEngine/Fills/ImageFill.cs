@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace UIEngine.Fills
 {
@@ -10,6 +11,8 @@ namespace UIEngine.Fills
         public Image Image { get; set; }
         public Size Size { get { return Image.Size; } }
 
+        public override float Transparency { get; set; }
+        
         public ImageFill(Image image)
         {
             this.Image = image;
@@ -17,7 +20,26 @@ namespace UIEngine.Fills
 
         public override void DrawRectangle(Graphics g, int x, int y, int width, int height)
         {
-            g.DrawImage(Image, x, y, width, height);
+            ColorMatrix matrix = new ColorMatrix();
+            matrix.Matrix33 = Transparency;
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+            g.DrawImage(Image, new Rectangle(0, 0, width, height), 0, 0, Image.Width, Image.Height, GraphicsUnit.Pixel, attributes);
+        }
+
+        public override void DrawPoligon(Graphics g, Point[] points)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DrawLine(Graphics g, Point from, Point to, float width)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DrawString(Graphics g, string text, Font font, Rectangle bound)
+        {
+            throw new NotImplementedException();
         }
     }
 }

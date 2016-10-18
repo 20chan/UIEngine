@@ -17,12 +17,12 @@ namespace UIEngine
             }
         }
 
-        public Fill Fill { get; set; }
-        public Fill BackgroundFill { get; set; }
+        public Fill Fill { get; set; } = Fill.DefaultFill;
+        public Fill BackgroundFill { get; set; } = Fill.DefaultBackgroundFill;
 
         public virtual void Draw(Graphics g)
         {
-
+            BackgroundFill.DrawRectangle(g, Bound);
         }
     }
 }

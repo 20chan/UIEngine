@@ -8,6 +8,21 @@ namespace UIEngine.Fills
 {
     public class NoFill : Fill
     {
+        public override float Transparency
+        {
+            get
+            {
+                //None.
+                return -1;
+            }
+
+            set
+            {
+                //None.
+                return;
+            }
+        }
+
         public override void DrawRectangle(Graphics g, int x, int y, int width, int height)
         {
             //Do Nothing.

@@ -40,16 +40,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animation.cs" />
+    <Compile Include="Animations\FadeInAni.cs" />
+    <Compile Include="Effect.cs" />
     <Compile Include="Fill.cs" />
     <Compile Include="Fills\ImageFill.cs" />
     <Compile Include="Fills\NoFill.cs" />
     <Compile Include="Fills\SolidFill.cs" />
     <Compile Include="Interfaces\UILabel.cs" />
+    <Compile Include="Interfaces\UIPicture.cs" />
     <Compile Include="UserInterface.cs" />
     <Compile Include="Presentation\Slide.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Effects\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

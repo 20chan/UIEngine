@@ -7,6 +7,7 @@ namespace UIEngine
 {
     public abstract class Fill
     {
+        public abstract float Transparency { get; set; }
         public abstract void DrawRectangle(Graphics g, int x, int y, int width, int height);
         public void DrawRectangle(Graphics g, Point location, Size size)
             => DrawRectangle(g, location.X, location.Y, size.Width, size.Height);
@@ -22,5 +23,8 @@ namespace UIEngine
         public abstract void DrawLine(Graphics g, Point from, Point to, float width);
         public void DrawLine(Graphics g, int x1, int y1, int x2, int y2, float width)
             => DrawLine(g, new Point(x1, y1), new Point(x2, y2), width);
+
+        public static Fill DefaultBackgroundFill = new Fills.NoFill();
+        public static Fill DefaultFill = new Fills.SolidFill(Color.Black);
     }
 }

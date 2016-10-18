@@ -17,7 +17,8 @@ namespace UIEngine.Fills
                 _color = value;
             }
         }
-        public float Transparency
+
+        public override float Transparency
         {
             get { return (float)this.Color.A / (float)byte.MaxValue; }
             set { this.Color = Color.FromArgb((int)(value * 255), this.Color); }
