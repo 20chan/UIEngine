@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Animation.cs" />
     <Compile Include="Animations\FadeInAni.cs" />
+    <Compile Include="Animations\FadeOutAni.cs" />
     <Compile Include="Effect.cs" />
     <Compile Include="Fill.cs" />
     <Compile Include="Fills\ImageFill.cs" />

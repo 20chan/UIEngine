@@ -9,6 +9,9 @@ namespace UIEngine.Presentations
         public List<Slide> Slides { get; private set; }
         public Slide CurrentSlide { get { return Slides[_current]; } }
 
+        public event Action PresentationEnded;
+        public event Action InvalidateNeeded;
+
         private int _current = 0;
 
         public Presentation()
@@ -16,8 +19,15 @@ namespace UIEngine.Presentations
             Slides = new List<Slide>();
         }
 
+        private void InitEvent()
+        {
+            foreach (var s in Slides)
+                s.InvalidateNeeded += () => InvalidateNeeded?.Invoke();
+        }
+
         public void Begin()
         {
+            InitEvent();
             CurrentSlide.SlideBegin();
         }
 
@@ -33,7 +43,7 @@ namespace UIEngine.Presentations
             if (CurrentSlide.IsAllAnimationsPlayed)
             {
                 if (Slides.Last() == CurrentSlide) //마지막 검은 화면
-                    throw new NotImplementedException();
+                    PresentationEnded?.Invoke();
                 else
                     NextSlide();
             }

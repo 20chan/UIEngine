@@ -8,6 +8,10 @@ namespace UIEngine
         public Trigger.TriggerType TriggerType { get; set; }
         public abstract event Action AnimationEnded;
         
+        public bool TimerNeeded { get; protected set; }
+        public System.Timers.ElapsedEventHandler InnerTimer { get; protected set; }
+        public abstract event Action<bool> TimerEnableChanged;
+        
         public uint Duration { get; set; }
 
         public Animation(UserInterface parent, uint duration)

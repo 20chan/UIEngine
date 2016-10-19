@@ -3,7 +3,7 @@ using System.Timers;
 
 namespace UIEngine.Animations
 {
-    public class FadeInAni : Animation
+    public class FadeOutAni : Animation
     {
         public override event Action AnimationEnded;
         public override event Action<bool> TimerEnableChanged;
@@ -11,11 +11,11 @@ namespace UIEngine.Animations
 
         private uint _elapsed = 0;
 
-        public FadeInAni(UserInterface parent, uint duration) : base(parent, duration)
+        public FadeOutAni(UserInterface parent, uint duration) : base(parent, duration)
         {
             InnerTimer += (sender, e) =>
             {
-                Parent.Fill.Transparency = 1.0f - (float)(Duration - (int)_elapsed) / (float)Duration;
+                Parent.Fill.Transparency = (float)(Duration - (int)_elapsed) / (float)Duration;
                 _elapsed += (uint)((Timer)sender).Interval;
 
                 if (_elapsed >= Duration)
@@ -37,12 +37,12 @@ namespace UIEngine.Animations
 
         public override void BeforeParent()
         {
-            Parent.Fill.Transparency = 0;
+            Parent.Fill.Transparency = originalAlpha;
         }
 
         public override void AfterParent()
         {
-            Parent.Fill.Transparency = originalAlpha;
+            Parent.Fill.Transparency = 0;
         }
     }
 }
