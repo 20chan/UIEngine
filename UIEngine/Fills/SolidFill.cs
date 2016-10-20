@@ -35,6 +35,7 @@ namespace UIEngine.Fills
 
         public override void DrawString(Graphics g, string text, Font font, Rectangle bound)
         {
+            if (_pen.Color.A == 0) System.Diagnostics.Debugger.Break();
             g.DrawString(text, font, _pen.Brush, bound);
         }
 

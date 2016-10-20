@@ -16,7 +16,7 @@ namespace UIEngine.Animations
             InnerTimer += (sender, e) =>
             {
                 Parent.Fill.Transparency = (float)(Duration - (int)_elapsed) / (float)Duration;
-                _elapsed += (uint)((Timer)sender).Interval;
+                if(_elapsed == 1000) System.Diagnostics.Debugger.Break();
 
                 if (_elapsed >= Duration)
                 {
@@ -24,6 +24,7 @@ namespace UIEngine.Animations
                     TimerNeeded = false;
                     TimerEnableChanged?.Invoke(false);
                 }
+                _elapsed += (uint)((Timer)sender).Interval;
             };
             originalAlpha = parent.Fill.Transparency;
         }

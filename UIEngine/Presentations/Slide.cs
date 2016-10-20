@@ -22,7 +22,7 @@ namespace UIEngine.Presentations
             Interfaces = new List<UserInterface>();
             Animations = new List<Animation>();
 
-            _timer = new Timer(100);
+            _timer = new Timer(50);
             _timer.Elapsed += _timer_Elapsed;
         }
 
@@ -31,7 +31,9 @@ namespace UIEngine.Presentations
             foreach(var ani in Animations)
             {
                 if (ani.TimerNeeded)
+                {
                     ani.InnerTimer?.Invoke(sender, e);
+                }
             }
             InvalidateNeeded?.Invoke();
         }

@@ -17,6 +17,7 @@ namespace UIEngine.Animations
             {
                 Parent.Fill.Transparency = 1.0f - (float)(Duration - (int)_elapsed) / (float)Duration;
                 _elapsed += (uint)((Timer)sender).Interval;
+                System.Diagnostics.Trace.WriteLine("IN" + _elapsed);
 
                 if (_elapsed >= Duration)
                 {
