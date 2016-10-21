@@ -111,8 +111,9 @@ namespace UIEngine.Presentations
             {
                 if (Animations[_curAni].TriggerType == Trigger.TriggerType.WithPrevious)
                     Animations[_curAni++].Play();
-                else
-                    break;
+                else if (Animations[_curAni].TriggerType == Trigger.TriggerType.AfterPrevious)
+                    _curAni++;
+                else break;
             }
 
             //AfterPrevious animations should be set in 'SetAnimationTrigger' method
