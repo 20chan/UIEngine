@@ -9,7 +9,7 @@ namespace UIEngine.Fills
         public Image Image { get; set; }
         public Size Size { get { return Image.Size; } }
 
-        public override float Transparency { get; set; }
+        public override float Transparency { get; set; } = 1f;
         
         public ImageFill(Image image)
         {
@@ -22,7 +22,7 @@ namespace UIEngine.Fills
             matrix.Matrix33 = Transparency;
             ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-            g.DrawImage(Image, new Rectangle(0, 0, width, height), 0, 0, Image.Width, Image.Height, GraphicsUnit.Pixel, attributes);
+            g.DrawImage(Image, new Rectangle(x, y, width, height), 0, 0, Image.Width, Image.Height, GraphicsUnit.Pixel, attributes);
         }
 
         public override void DrawPoligon(Graphics g, Point[] points)

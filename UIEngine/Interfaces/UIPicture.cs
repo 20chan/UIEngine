@@ -9,6 +9,7 @@ namespace UIEngine.Interfaces
 
         public UIPicture(Image image)
         {
+            this.Image = image;
             this.Fill = new ImageFill(image);
         }
 
