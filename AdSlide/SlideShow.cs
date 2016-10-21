@@ -10,6 +10,7 @@ namespace AdSlide
         public SlideShow(Presentation pres)
         {
             InitializeComponent();
+            DoubleBuffered = true;
             _presentation = pres;
             _presentation.InvalidateNeeded += () => {
                 System.Diagnostics.Trace.WriteLine("Invalidate"); this.Invalidate(); };
@@ -18,8 +19,7 @@ namespace AdSlide
         
         protected override void OnPaint(PaintEventArgs e)
         {
-            foreach (var ui in _presentation.CurrentSlide.Interfaces)
-                ui.Draw(e.Graphics);
+            _presentation.Draw(e.Graphics, Width, Height);
             base.OnPaint(e);
         }
 

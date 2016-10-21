@@ -31,6 +31,11 @@ namespace UIEngine.Presentations
             CurrentSlide.SlideBegin();
         }
 
+        public void Draw(System.Drawing.Graphics g, int width, int height)
+        {
+            CurrentSlide.Draw(g, width, height);
+        }
+
         private void NextSlide()
         {
             _current++;

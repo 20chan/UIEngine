@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Timers;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace UIEngine.Presentations
 {
@@ -102,6 +103,20 @@ namespace UIEngine.Presentations
         public void UndoAnimation()
         {
             throw new NotImplementedException();
+        }
+
+        protected internal void Draw(Graphics g, int width, int height)
+        {
+            using (Bitmap b = new Bitmap(width, height))
+            using (Graphics _g = Graphics.FromImage(b))
+            {
+                foreach (var ui in Interfaces)
+                {
+                    ui.Draw(_g);
+                }
+                g.Clear(Color.White);
+                g.DrawImage(b, 0, 0);
+            }
         }
     }
 }

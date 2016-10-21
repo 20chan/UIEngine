@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 282);
+            this.ClientSize = new System.Drawing.Size(624, 514);
             this.Name = "SlideShow";
             this.Text = "SlideShow";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SlideShow_MouseDown);
