@@ -60,14 +60,29 @@ namespace UIEngine.Presentations
             for(int i = 1; i < Animations.Count; i++)
             {
                 if (Animations[i].TriggerType == Trigger.TriggerType.AfterPrevious)
-                    Animations[i - 1].AnimationEnded += () => Animations[i].Play();
+                    //원래 코드 : Animations[i - 1].AnimationEnded += () => Animations[i].Play();
+                    //이때 대리자 대신 람다를 사용했을때는 i가 마지막 값이 남아있어서 인덱스에러가 났음.
+                    //암튼 결론은 대리자로 고쳐버렸음! :)
+                    Animations[i - 1].AnimationEnded += new Action(Animations[i].Play);
             }
         }
 
         private void SetUIsBeforePlay()
         {
+            //한 인터페이스에 여러 애니메이션이 있다면 첫번째 애니메이션의 BeforeParent로 설정하는걸로 변경
+            /* Before
             foreach (var ani in Animations)
                 ani.BeforeParent();
+            */
+
+            //After
+            foreach(var ui in Interfaces)
+            {
+                var uiAnims = Animations.Where(ani => ani.Parent == ui);
+                if (uiAnims == null || uiAnims.Count() == 0)
+                    continue;
+                uiAnims.First().BeforeParent();
+            }
         }
 
         public void SlideBegin()
@@ -77,10 +92,13 @@ namespace UIEngine.Presentations
             SetUIsBeforePlay();
             if(Animations.Count > 0)
             {
+                /*
                 if (Animations.First().TriggerType == Trigger.TriggerType.WithPrevious)
                     Animations[_curAni++].Play();
                 else if (Animations.First().TriggerType == Trigger.TriggerType.AfterPrevious)
                     throw new NotImplementedException(); //After Transition
+                */
+                PlayAnimation();
             }
         }
 
