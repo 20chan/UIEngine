@@ -15,8 +15,9 @@ namespace UIEngine.Animations
         {
             InnerTimer += (sender, e) =>
             {
+                //if (_elapsed == Duration) System.Diagnostics.Debugger.Break();
                 Parent.Fill.Transparency = (float)(Duration - (int)_elapsed) / (float)Duration;
-                if(_elapsed == 1000) System.Diagnostics.Debugger.Break();
+                System.Diagnostics.Trace.WriteLine("OUT" + _elapsed);
 
                 if (_elapsed >= Duration)
                 {

@@ -4,13 +4,14 @@ namespace UIEngine.Fills
 {
     public class SolidFill : Fill
     {
+        private Pen _pen;
         private Color _color;
         public Color Color
         {
             get { return _color; }
             set
             {
-                _pen = new Pen(this._color);
+                _pen = new Pen(value);
                 _color = value;
             }
         }
@@ -18,11 +19,9 @@ namespace UIEngine.Fills
         public override float Transparency
         {
             get { return (float)this.Color.A / (float)byte.MaxValue; }
-            set { this.Color = Color.FromArgb((int)(value * 255), this.Color); }
+            set { this.Color = Color.FromArgb((int)(value * 255), this.Color); System.Diagnostics.Debug.WriteLine(Color); }
         }
-
-        private Pen _pen;
-
+        
         public SolidFill(Color color)
         {
             this.Color = color;
@@ -35,8 +34,8 @@ namespace UIEngine.Fills
 
         public override void DrawString(Graphics g, string text, Font font, Rectangle bound)
         {
-            if (_pen.Color.A == 0) System.Diagnostics.Debugger.Break();
             g.DrawString(text, font, _pen.Brush, bound);
+            System.Diagnostics.Debug.WriteLine("DRAW : " + _pen.Color);
         }
 
         public override void DrawPoligon(Graphics g, Point[] points)
