@@ -23,7 +23,7 @@ namespace UIEngine.Presentations
             Interfaces = new List<UserInterface>();
             Animations = new List<Animation>();
 
-            _timer = new Timer(50);
+            _timer = new Timer(60);
             _timer.Elapsed += _timer_Elapsed;
         }
 
@@ -57,6 +57,8 @@ namespace UIEngine.Presentations
 
         private void SetAnimationsTrigger()
         {
+            for (int i = 0; i < Animations.Count; i++) 
+                Animations[i].AnimationEnded += new Action(Animations[i].AfterParent) + new Action(InvalidateNeeded.Invoke);
             for(int i = 1; i < Animations.Count; i++)
             {
                 if (Animations[i].TriggerType == Trigger.TriggerType.AfterPrevious)
@@ -64,6 +66,7 @@ namespace UIEngine.Presentations
                     //이때 대리자 대신 람다를 사용했을때는 i가 마지막 값이 남아있어서 인덱스에러가 났음.
                     //암튼 결론은 대리자로 고쳐버렸음! :)
                     Animations[i - 1].AnimationEnded += new Action(Animations[i].Play);
+                
             }
         }
 
@@ -104,6 +107,15 @@ namespace UIEngine.Presentations
 
         public void PlayAnimation()
         {
+            //플레이하던게 있다면 플레이하던 애니메이션을 스킵하고 리턴
+            var playing = Animations.Where(a => a.TimerNeeded);
+            if (playing != null && playing.Count() != 0)
+            {
+                playing.ToList().ForEach(a => a.Skip());
+                return;
+            }
+            
+
             if (IsAllAnimationsPlayed) throw new InvalidOperationException("No more animations!");
             Animations[_curAni++].Play();
 

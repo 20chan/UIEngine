@@ -25,6 +25,11 @@ namespace UIEngine
 
         }
 
+        public virtual void Skip()
+        {
+            //AfterParent();
+        }
+
         /// <summary>
         /// Make parent ui before animation played
         /// </summary>

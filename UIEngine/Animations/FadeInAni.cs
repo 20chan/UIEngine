@@ -15,16 +15,16 @@ namespace UIEngine.Animations
         {
             InnerTimer += (sender, e) =>
             {
+                if (_elapsed >= Duration)
+                {
+                    Skip();
+                    return;
+                }
+
                 Parent.Fill.Transparency = 1.0f - (float)(Duration - (int)_elapsed) / (float)Duration;
                 _elapsed += (uint)((Timer)sender).Interval;
                 System.Diagnostics.Trace.WriteLine("IN" + _elapsed);
 
-                if (_elapsed >= Duration)
-                {
-                    AnimationEnded?.Invoke();
-                    TimerNeeded = false;
-                    TimerEnableChanged?.Invoke(false);
-                }
             };
             originalAlpha = parent.Fill.Transparency;
         }
@@ -34,6 +34,14 @@ namespace UIEngine.Animations
             base.Play();
             TimerNeeded = true;
             TimerEnableChanged?.Invoke(true);
+        }
+
+        public override void Skip()
+        {
+            base.Skip();
+            AnimationEnded?.Invoke();
+            TimerNeeded = false;
+            TimerEnableChanged?.Invoke(false);
         }
 
         public override void BeforeParent()

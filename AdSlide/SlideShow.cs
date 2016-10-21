@@ -25,7 +25,8 @@ namespace AdSlide
 
         private void SlideShow_MouseDown(object sender, MouseEventArgs e)
         {
-            _presentation.Next();
+            if (e.Button == MouseButtons.Left)
+                _presentation.Next();
         }
     }
 }
