@@ -13,8 +13,7 @@ namespace UIEngine.Presentations
         public event Action InvalidateNeeded;
 
         private Timer _timer;
-
-
+        
         public bool IsAllAnimationsPlayed { get { return Animations.Count == _curAni; } }
         private int _curAni = 0;
 
@@ -162,7 +161,7 @@ namespace UIEngine.Presentations
             throw new NotImplementedException();
         }
 
-        protected internal void Draw(Graphics g, int width, int height)
+        internal void Draw(Graphics g, int width, int height)
         {
             using (Bitmap b = new Bitmap(width, height))
             using (Graphics _g = Graphics.FromImage(b))
