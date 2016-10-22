@@ -23,7 +23,7 @@ namespace UIEngine
         
         public virtual void Draw(Graphics g)
         {
-            g.ResetTransform();
+            //g.ResetTransform();
             g.TranslateTransform(Origin.X, Origin.Y);
             g.RotateTransform(Rotation);
             System.Diagnostics.Debug.WriteLine(string.Join(", ", g.Transform.Elements));

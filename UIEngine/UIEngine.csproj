@@ -43,6 +43,7 @@
     <Compile Include="Animation.cs" />
     <Compile Include="Animations\AnimationType.cs" />
     <Compile Include="Animations\EmphasisAnimation.cs" />
+    <Compile Include="Animations\Emphasis\SpinAni.cs" />
     <Compile Include="Animations\EntranceAnimation.cs" />
     <Compile Include="Animations\Entrance\FadeInAni.cs" />
     <Compile Include="Animations\ExitAnimation.cs" />
@@ -61,7 +62,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Animations\Emphasis\" />
     <Folder Include="Effects\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

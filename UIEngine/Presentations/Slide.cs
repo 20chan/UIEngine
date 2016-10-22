@@ -22,7 +22,7 @@ namespace UIEngine.Presentations
             Interfaces = new List<UserInterface>();
             Animations = new List<Animation>();
 
-            _timer = new Timer(60);
+            _timer = new Timer(20);
             _timer.Elapsed += _timer_Elapsed;
         }
 
@@ -64,11 +64,16 @@ namespace UIEngine.Presentations
             for (int i = 1; i < Animations.Count; i++)
             {
                 if (Animations[i].TriggerType == Trigger.TriggerType.AfterPrevious)
+                {
                     //원래 코드 : Animations[i - 1].AnimationEnded += () => Animations[i].Play();
                     //이때 대리자 대신 람다를 사용했을때는 i가 마지막 값이 남아있어서 인덱스에러가 났음.
                     //암튼 결론은 대리자로 고쳐버렸음! :)
                     Animations[i - 1].AnimationEnded += new Action(Animations[i].Play);
-
+                    for (int j = i + 1; j < Animations.Count() && Animations[j].TriggerType == Trigger.TriggerType.WithPrevious; j++)
+                    {
+                        Animations[i - 1].AnimationEnded += new Action(Animations[j].Play) + (() => { _curAni++; });
+                    }
+                }
             }
         }
 
@@ -125,9 +130,12 @@ namespace UIEngine.Presentations
             while (!IsAllAnimationsPlayed) //Play all WithPrevious animations
             {
                 if (Animations[_curAni].TriggerType == Trigger.TriggerType.WithPrevious)
-                    Animations[_curAni++].Play();
+                    PlayAnimation();
                 else if (Animations[_curAni].TriggerType == Trigger.TriggerType.AfterPrevious)
+                {
                     _curAni++;
+                    break;
+                }
                 else break;
             }
 
@@ -168,6 +176,8 @@ namespace UIEngine.Presentations
             {
                 foreach (var ui in Interfaces)
                 {
+                    _g.ResetTransform();
+                    _g.TranslateTransform(-250, -250);
                     ui.Draw(_g);
                 }
                 g.Clear(Color.White);

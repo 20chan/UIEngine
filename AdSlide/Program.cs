@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using UIEngine.Interfaces;
 using UIEngine.Animations.Entrance;
+using UIEngine.Animations.Emphasis;
 using UIEngine.Animations.Exit;
 using UIEngine.Presentations;
 
@@ -30,11 +31,13 @@ namespace AdSlide
                 FadeInAni imgfadein = new FadeInAni(pic, 1000) { TriggerType = UIEngine.Trigger.TriggerType.AfterPrevious };
                 FadeOutAni imgfadeout = new FadeOutAni(pic, 1000) { TriggerType = UIEngine.Trigger.TriggerType.MouseClick };
                 FadeInAni refade = new FadeInAni(label, 1000) { TriggerType = UIEngine.Trigger.TriggerType.MouseClick };
+                SpinAni spin = new SpinAni(pic, 1000, 3) { TriggerType = UIEngine.Trigger.TriggerType.WithPrevious };
                 first.Interfaces.Add(pic);
                 first.Interfaces.Add(label);
 
                 first.Animations.Add(fadein);
                 first.Animations.Add(imgfadein);
+                first.Animations.Add(spin);
                 first.Animations.Add(imgfadeout);
                 first.Animations.Add(fadeout);
                 first.Animations.Add(refade);
