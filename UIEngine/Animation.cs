@@ -7,6 +7,7 @@ namespace UIEngine
         public UserInterface Parent { get; private set; }
         public Trigger.TriggerType TriggerType { get; set; }
         public abstract event Action AnimationEnded;
+        public abstract event Action AnimationSkipped;
         
         public bool TimerNeeded { get; protected set; }
         public System.Timers.ElapsedEventHandler InnerTimer { get; protected set; }
@@ -27,7 +28,8 @@ namespace UIEngine
 
         public virtual void Skip()
         {
-            //AfterParent();
+            AfterParent();
+            
         }
 
         /// <summary>

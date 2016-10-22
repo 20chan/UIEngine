@@ -13,7 +13,7 @@ namespace UIEngine.Presentations
         public event Action InvalidateNeeded;
 
         private Timer _timer;
-    
+
 
         public bool IsAllAnimationsPlayed { get { return Animations.Count == _curAni; } }
         private int _curAni = 0;
@@ -29,7 +29,7 @@ namespace UIEngine.Presentations
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            foreach(var ani in Animations)
+            foreach (var ani in Animations)
             {
                 if (ani.TimerNeeded)
                 {
@@ -41,7 +41,7 @@ namespace UIEngine.Presentations
 
         private void SetAnimationsTimer()
         {
-            foreach(var ani in Animations)
+            foreach (var ani in Animations)
             {
                 ani.TimerEnableChanged += (enabled) =>
                 {
@@ -57,16 +57,19 @@ namespace UIEngine.Presentations
 
         private void SetAnimationsTrigger()
         {
-            for (int i = 0; i < Animations.Count; i++) 
+            for (int i = 0; i < Animations.Count; i++)
+            {
+                Animations[i].AnimationSkipped += new Action(Animations[i].AfterParent) + new Action(InvalidateNeeded.Invoke);
                 Animations[i].AnimationEnded += new Action(Animations[i].AfterParent) + new Action(InvalidateNeeded.Invoke);
-            for(int i = 1; i < Animations.Count; i++)
+            }
+            for (int i = 1; i < Animations.Count; i++)
             {
                 if (Animations[i].TriggerType == Trigger.TriggerType.AfterPrevious)
                     //원래 코드 : Animations[i - 1].AnimationEnded += () => Animations[i].Play();
                     //이때 대리자 대신 람다를 사용했을때는 i가 마지막 값이 남아있어서 인덱스에러가 났음.
                     //암튼 결론은 대리자로 고쳐버렸음! :)
                     Animations[i - 1].AnimationEnded += new Action(Animations[i].Play);
-                
+
             }
         }
 
@@ -79,7 +82,7 @@ namespace UIEngine.Presentations
             */
 
             //After
-            foreach(var ui in Interfaces)
+            foreach (var ui in Interfaces)
             {
                 var uiAnims = Animations.Where(ani => ani.Parent == ui);
                 if (uiAnims == null || uiAnims.Count() == 0)
@@ -93,7 +96,7 @@ namespace UIEngine.Presentations
             SetAnimationsTimer();
             SetAnimationsTrigger();
             SetUIsBeforePlay();
-            if(Animations.Count > 0)
+            if (Animations.Count > 0)
             {
                 /*
                 if (Animations.First().TriggerType == Trigger.TriggerType.WithPrevious)
@@ -107,11 +110,12 @@ namespace UIEngine.Presentations
 
         public void PlayAnimation()
         {
-            //플레이하던게 있다면 플레이하던 애니메이션을 스킵하고 리턴
+            //플레이하던게 있다면 플레이와 이어진 모든 애니메이션을 스킵하고 리턴
+            //람다 코드는 플레이 하던거만 플레이를 정지해서 사용하지 않음
             var playing = Animations.Where(a => a.TimerNeeded);
             if (playing != null && playing.Count() != 0)
             {
-                playing.ToList().ForEach(a => a.Skip());
+                SkipPlaying();
                 return;
             }
             
@@ -131,6 +135,28 @@ namespace UIEngine.Presentations
             //AfterPrevious animations should be set in 'SetAnimationTrigger' method
         }
 
+        private void SkipPlaying()
+        {
+            var toSkip = new List<int>();
+            for(int i = 0; i < Animations.Count; i++)
+            {
+                if(Animations[i].TimerNeeded)
+                {
+                    toSkip.Add(i);
+                    for(int j = i + 1; j < Animations.Count; j++)
+                    {
+                        if (Animations[j].TriggerType == Trigger.TriggerType.AfterPrevious)
+                            toSkip.Add(j);
+                        else
+                            break;
+                    }
+                }
+            }
+
+            toSkip.Distinct().ToList().ForEach(i => Animations[i].Skip());
+            InvalidateNeeded?.Invoke();
+        }
+        
         public void UndoAnimation()
         {
             throw new NotImplementedException();

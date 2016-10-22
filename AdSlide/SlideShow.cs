@@ -12,15 +12,17 @@ namespace AdSlide
             InitializeComponent();
             DoubleBuffered = true;
             _presentation = pres;
-            _presentation.InvalidateNeeded += () => {
-                System.Diagnostics.Trace.WriteLine("Invalidate"); this.Invalidate(); };
+            _presentation.InvalidateNeeded += () =>
+            {
+                System.Diagnostics.Trace.WriteLine("Invalidate"); this.Invalidate();
+            };
             _presentation.Begin();
         }
         
         protected override void OnPaint(PaintEventArgs e)
         {
-            _presentation.Draw(e.Graphics, Width, Height);
             base.OnPaint(e);
+            _presentation.Draw(e.Graphics, Width, Height);
         }
 
         private void SlideShow_MouseDown(object sender, MouseEventArgs e)

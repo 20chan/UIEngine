@@ -22,7 +22,9 @@ namespace UIEngine.Presentations
         private void InitEvent()
         {
             foreach (var s in Slides)
+            {
                 s.InvalidateNeeded += () => InvalidateNeeded?.Invoke();
+            }
         }
 
         public void Begin()

@@ -6,6 +6,7 @@ namespace UIEngine.Animations
     public class FadeOutAni : Animation
     {
         public override event Action AnimationEnded;
+        public override event Action AnimationSkipped;
         public override event Action<bool> TimerEnableChanged;
         private readonly float originalAlpha;
 
@@ -17,7 +18,9 @@ namespace UIEngine.Animations
             {
                 if (_elapsed >= Duration)
                 {
-                    Skip();
+                    AnimationEnded?.Invoke();
+                    TimerNeeded = false;
+                    TimerEnableChanged?.Invoke(false);
                     return;
                 }
 
@@ -39,10 +42,10 @@ namespace UIEngine.Animations
 
         public override void Skip()
         {
-            base.Skip();
-            AnimationEnded?.Invoke();
+            AnimationSkipped?.Invoke();
             TimerNeeded = false;
             TimerEnableChanged?.Invoke(false);
+            base.Skip();
         }
 
         public override void BeforeParent()
