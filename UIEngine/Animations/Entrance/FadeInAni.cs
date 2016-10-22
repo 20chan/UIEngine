@@ -26,7 +26,7 @@ namespace UIEngine.Animations.Entrance
 
                 Parent.Fill.Transparency = 1.0f - (float)(Duration - (int)_elapsed) / (float)Duration;
                 _elapsed += (uint)((Timer)sender).Interval;
-                System.Diagnostics.Trace.WriteLine("IN" + _elapsed);
+                System.Diagnostics.Debug.WriteLine("IN" + _elapsed);
 
             };
             originalAlpha = parent.Fill.Transparency;

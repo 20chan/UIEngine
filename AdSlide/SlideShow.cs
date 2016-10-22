@@ -14,7 +14,7 @@ namespace AdSlide
             _presentation = pres;
             _presentation.InvalidateNeeded += () =>
             {
-                System.Diagnostics.Trace.WriteLine("Invalidate"); this.Invalidate();
+                System.Diagnostics.Debug.WriteLine("Invalidate"); this.Invalidate();
             };
             _presentation.Begin();
         }

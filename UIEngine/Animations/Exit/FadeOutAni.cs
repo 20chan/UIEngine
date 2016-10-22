@@ -26,7 +26,7 @@ namespace UIEngine.Animations.Exit
 
                 //if (_elapsed == Duration) System.Diagnostics.Debugger.Break();
                 Parent.Fill.Transparency = (float)(Duration - (int)_elapsed) / (float)Duration;
-                System.Diagnostics.Trace.WriteLine("OUT" + _elapsed);
+                System.Diagnostics.Debug.WriteLine("OUT" + _elapsed);
 
                 _elapsed += (uint)((Timer)sender).Interval;
             };

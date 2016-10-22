@@ -15,6 +15,7 @@ namespace UIEngine.Interfaces
 
         public override void Draw(Graphics g)
         {
+            base.Draw(g);
             this.Fill.DrawRectangle(g, this.Bound);
         }
     }
