@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Timers;
 
-namespace UIEngine.Animations
+namespace UIEngine.Animations.Entrance
 {
-    public class FadeOutAni : Animation
+    public class FadeInAni : EntranceAnimation
     {
         public override event Action AnimationEnded;
         public override event Action AnimationSkipped;
@@ -12,7 +12,7 @@ namespace UIEngine.Animations
 
         private uint _elapsed = 0;
 
-        public FadeOutAni(UserInterface parent, uint duration) : base(parent, duration)
+        public FadeInAni(UserInterface parent, uint duration) : base(parent, duration)
         {
             InnerTimer += (sender, e) =>
             {
@@ -24,11 +24,10 @@ namespace UIEngine.Animations
                     return;
                 }
 
-                //if (_elapsed == Duration) System.Diagnostics.Debugger.Break();
-                Parent.Fill.Transparency = (float)(Duration - (int)_elapsed) / (float)Duration;
-                System.Diagnostics.Trace.WriteLine("OUT" + _elapsed);
-
+                Parent.Fill.Transparency = 1.0f - (float)(Duration - (int)_elapsed) / (float)Duration;
                 _elapsed += (uint)((Timer)sender).Interval;
+                System.Diagnostics.Trace.WriteLine("IN" + _elapsed);
+
             };
             originalAlpha = parent.Fill.Transparency;
         }
@@ -42,20 +41,20 @@ namespace UIEngine.Animations
 
         public override void Skip()
         {
+            base.Skip();
             AnimationSkipped?.Invoke();
             TimerNeeded = false;
             TimerEnableChanged?.Invoke(false);
-            base.Skip();
         }
 
         public override void BeforeParent()
         {
-            Parent.Fill.Transparency = originalAlpha;
+            Parent.Fill.Transparency = 0;
         }
 
         public override void AfterParent()
         {
-            Parent.Fill.Transparency = 0;
+            Parent.Fill.Transparency = originalAlpha;
         }
     }
 }

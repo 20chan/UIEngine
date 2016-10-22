@@ -41,8 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
-    <Compile Include="Animations\FadeInAni.cs" />
-    <Compile Include="Animations\FadeOutAni.cs" />
+    <Compile Include="Animations\AnimationType.cs" />
+    <Compile Include="Animations\EmphasisAnimation.cs" />
+    <Compile Include="Animations\EntranceAnimation.cs" />
+    <Compile Include="Animations\Entrance\FadeInAni.cs" />
+    <Compile Include="Animations\ExitAnimation.cs" />
+    <Compile Include="Animations\Exit\FadeOutAni.cs" />
     <Compile Include="Effect.cs" />
     <Compile Include="Fill.cs" />
     <Compile Include="Fills\ImageFill.cs" />
@@ -57,6 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Animations\Emphasis\" />
     <Folder Include="Effects\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
