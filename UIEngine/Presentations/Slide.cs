@@ -71,6 +71,7 @@ namespace UIEngine.Presentations
                     Animations[i - 1].AnimationEnded += new Action(Animations[i].Play);
                     for (int j = i + 1; j < Animations.Count() && Animations[j].TriggerType == Trigger.TriggerType.WithPrevious; j++)
                     {
+                        //_curAni가 여기서 증가를 하면 안됨.. Animations[i - 1]가 시작하는 동시에 증가해야함 ㅇㅅㅇ;;
                         Animations[i - 1].AnimationEnded += new Action(Animations[j].Play) + (() => { _curAni++; });
                     }
                 }

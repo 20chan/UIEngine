@@ -26,12 +26,13 @@ namespace AdSlide
                 UILabel label = new UILabel() { Text = "Example", Position = new Point(100, 100), Size = new Size(300, 300), Rotation = 0f,
                     Font = new Font("맑은 고딕", 80f), Fill = new UIEngine.Fills.SolidFill(Color.Blue) };
                 UIPicture pic = new UIPicture(Image.FromFile(@"D:\Image\Logo\photo.jpg")) { Position = new Point(0, 0), Size = new Size(500, 500), Rotation = 10f };
+
                 FadeInAni fadein = new FadeInAni(label, 1000) { TriggerType = UIEngine.Trigger.TriggerType.WithPrevious };
                 FadeOutAni fadeout = new FadeOutAni(label, 1000) { TriggerType = UIEngine.Trigger.TriggerType.AfterPrevious };
                 FadeInAni imgfadein = new FadeInAni(pic, 1000) { TriggerType = UIEngine.Trigger.TriggerType.AfterPrevious };
                 FadeOutAni imgfadeout = new FadeOutAni(pic, 1000) { TriggerType = UIEngine.Trigger.TriggerType.MouseClick };
                 FadeInAni refade = new FadeInAni(label, 1000) { TriggerType = UIEngine.Trigger.TriggerType.MouseClick };
-                SpinAni spin = new SpinAni(pic, 1000, 3) { TriggerType = UIEngine.Trigger.TriggerType.WithPrevious };
+                SpinAni spin = new SpinAni(pic, 1000, 1) { TriggerType = UIEngine.Trigger.TriggerType.WithPrevious };
                 first.Interfaces.Add(pic);
                 first.Interfaces.Add(label);
 
