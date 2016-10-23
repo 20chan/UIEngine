@@ -178,7 +178,7 @@ namespace UIEngine.Presentations
                 foreach (var ui in Interfaces)
                 {
                     _g.ResetTransform();
-                    _g.TranslateTransform(-250, -250);
+                    //_g.TranslateTransform(-250, -250);
                     ui.Draw(_g);
                 }
                 g.Clear(Color.White);

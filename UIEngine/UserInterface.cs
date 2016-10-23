@@ -26,6 +26,7 @@ namespace UIEngine
             //g.ResetTransform();
             g.TranslateTransform(Origin.X, Origin.Y);
             g.RotateTransform(Rotation);
+            g.TranslateTransform(-Origin.X, -Origin.Y);
             System.Diagnostics.Debug.WriteLine(string.Join(", ", g.Transform.Elements));
             BackgroundFill.DrawRectangle(g, Bound);
         }
