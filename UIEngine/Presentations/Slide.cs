@@ -58,6 +58,7 @@ namespace UIEngine.Presentations
         {
             for (int i = 0; i < Animations.Count; i++)
             {
+                Animations[i].AnimationBeginned += () => _curAni++;
                 Animations[i].AnimationSkipped += new Action(Animations[i].AfterParent) + new Action(InvalidateNeeded.Invoke);
                 Animations[i].AnimationEnded += new Action(Animations[i].AfterParent) + new Action(InvalidateNeeded.Invoke);
             }
@@ -72,7 +73,8 @@ namespace UIEngine.Presentations
                     for (int j = i + 1; j < Animations.Count() && Animations[j].TriggerType == Trigger.TriggerType.WithPrevious; j++)
                     {
                         //_curAni가 여기서 증가를 하면 안됨.. Animations[i - 1]가 시작하는 동시에 증가해야함 ㅇㅅㅇ;;
-                        Animations[i - 1].AnimationEnded += new Action(Animations[j].Play) + (() => { _curAni++; });
+                        //위 문제를 AnimationBeginned이벤트를 만들어서 해결함.
+                        Animations[i - 1].AnimationEnded += new Action(Animations[j].Play); // + (() => { _curAni++; });
                     }
                 }
             }
@@ -126,17 +128,18 @@ namespace UIEngine.Presentations
             
 
             if (IsAllAnimationsPlayed) throw new InvalidOperationException("No more animations!");
-            Animations[_curAni++].Play();
+            //Animations[_curAni++].Play();
+            Animations[_curAni].Play();
 
             while (!IsAllAnimationsPlayed) //Play all WithPrevious animations
             {
                 if (Animations[_curAni].TriggerType == Trigger.TriggerType.WithPrevious)
                     PlayAnimation();
-                else if (Animations[_curAni].TriggerType == Trigger.TriggerType.AfterPrevious)
+                /*else if (Animations[_curAni].TriggerType == Trigger.TriggerType.AfterPrevious)
                 {
                     _curAni++;
                     break;
-                }
+                }*/
                 else break;
             }
 

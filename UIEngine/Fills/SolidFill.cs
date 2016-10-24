@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace UIEngine.Fills
 {
@@ -22,7 +23,7 @@ namespace UIEngine.Fills
             set { this.Color = Color.FromArgb((int)(value * 255), this.Color); System.Diagnostics.Debug.WriteLine(Color); }
         }
         
-        public SolidFill(Color color)
+        public SolidFill(Color color, float transparency = 1f)
         {
             this.Color = color;
         }
@@ -30,6 +31,11 @@ namespace UIEngine.Fills
         public override void DrawRectangle(Graphics g, int x, int y, int width, int height)
         {
             g.DrawRectangle(_pen, x, y, width, height);
+        }
+
+        public override void FillRectangle(Graphics g, int x, int y, int width, int height)
+        {
+            g.FillRectangle(_pen.Brush, x, y, width, height);
         }
 
         public override void DrawString(Graphics g, string text, Font font, Rectangle bound)

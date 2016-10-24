@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace UIEngine.Fills
 {
@@ -20,6 +21,12 @@ namespace UIEngine.Fills
         }
 
         public override void DrawRectangle(Graphics g, int x, int y, int width, int height)
+        {
+            //Do Nothing.
+            return;
+        }
+
+        public override void FillRectangle(Graphics g, int x, int y, int width, int height)
         {
             //Do Nothing.
             return;

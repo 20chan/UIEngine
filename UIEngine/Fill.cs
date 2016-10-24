@@ -10,6 +10,12 @@ namespace UIEngine
             => DrawRectangle(g, location.X, location.Y, size.Width, size.Height);
         public void DrawRectangle(Graphics g, Rectangle bound)
             => DrawRectangle(g, bound.X, bound.Y, bound.Width, bound.Height);
+        
+        public abstract void FillRectangle(Graphics g, int x, int y, int width, int height);
+        public void FillRectangle(Graphics g, Point location, Size size)
+            => FillRectangle(g, location.X, location.Y, size.Width, size.Height);
+        public void FillRectangle(Graphics g, Rectangle bound)
+            => FillRectangle(g, bound.X, bound.Y, bound.Width, bound.Height);
 
         public void DrawString(Graphics g, string text, Font font, int x, int y, int width, int height)
             => DrawString(g, text, font, new Rectangle(x, y, width, height));

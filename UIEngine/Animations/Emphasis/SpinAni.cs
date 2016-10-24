@@ -5,6 +5,7 @@ namespace UIEngine.Animations.Emphasis
 {
     public class SpinAni : EmphasisAnimation
     {
+        public override event Action AnimationBeginned;
         public override event Action AnimationEnded;
         public override event Action AnimationSkipped;
         public override event Action<bool> TimerEnableChanged;
@@ -35,6 +36,7 @@ namespace UIEngine.Animations.Emphasis
         public override void Play()
         {
             base.Play();
+            AnimationBeginned?.Invoke();
             TimerNeeded = true;
             TimerEnableChanged?.Invoke(true);
         }

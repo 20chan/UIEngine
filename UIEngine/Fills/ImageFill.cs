@@ -18,6 +18,11 @@ namespace UIEngine.Fills
 
         public override void DrawRectangle(Graphics g, int x, int y, int width, int height)
         {
+            FillRectangle(g, x, y, width, height);
+        }
+
+        public override void FillRectangle(Graphics g, int x, int y, int width, int height)
+        {
             ColorMatrix matrix = new ColorMatrix();
             matrix.Matrix33 = Transparency;
             ImageAttributes attributes = new ImageAttributes();

@@ -20,15 +20,19 @@ namespace UIEngine
 
         public Fill Fill { get; set; } = Fill.DefaultFill;
         public Fill BackgroundFill { get; set; } = Fill.DefaultBackgroundFill;
+
+        public bool BackgroundTransparencyEqual { get; set; } = true;
         
         public virtual void Draw(Graphics g)
         {
+            if (BackgroundTransparencyEqual)
+                BackgroundFill.Transparency = Fill.Transparency;
             //g.ResetTransform();
             g.TranslateTransform(Origin.X, Origin.Y);
             g.RotateTransform(Rotation);
             g.TranslateTransform(-Origin.X, -Origin.Y);
             System.Diagnostics.Debug.WriteLine(string.Join(", ", g.Transform.Elements));
-            BackgroundFill.DrawRectangle(g, Bound);
+            BackgroundFill.FillRectangle(g, Bound);
         }
     }
 }

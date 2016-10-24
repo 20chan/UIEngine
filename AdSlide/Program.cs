@@ -24,7 +24,7 @@ namespace AdSlide
             {
                 Slide first = new Slide();
                 UILabel label = new UILabel() { Text = "Example", Position = new Point(100, 100), Size = new Size(300, 300), Rotation = 0f,
-                    Font = new Font("맑은 고딕", 80f), Fill = new UIEngine.Fills.SolidFill(Color.Blue) };
+                    Font = new Font("맑은 고딕", 80f), Fill = new UIEngine.Fills.SolidFill(Color.Blue), BackgroundFill = new UIEngine.Fills.SolidFill(Color.Yellow, 0.5f)};
                 UIPicture pic = new UIPicture(Image.FromFile(@"D:\Image\test.png"), 0.5f) { Position = new Point(50, 0), Rotation = 10f };
 
                 FadeInAni fadein = new FadeInAni(label, 1000) { TriggerType = UIEngine.Trigger.TriggerType.WithPrevious };
@@ -33,8 +33,8 @@ namespace AdSlide
                 FadeOutAni imgfadeout = new FadeOutAni(pic, 1000) { TriggerType = UIEngine.Trigger.TriggerType.MouseClick };
                 FadeInAni refade = new FadeInAni(label, 1000) { TriggerType = UIEngine.Trigger.TriggerType.MouseClick };
                 SpinAni spin = new SpinAni(pic, 10000, 10) { TriggerType = UIEngine.Trigger.TriggerType.WithPrevious };
-                first.Interfaces.Add(pic);
                 first.Interfaces.Add(label);
+                first.Interfaces.Add(pic);
 
                 first.Animations.Add(fadein);
                 first.Animations.Add(imgfadein);

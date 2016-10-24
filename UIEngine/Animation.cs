@@ -7,6 +7,7 @@ namespace UIEngine
         public UserInterface Parent { get; private set; }
         public Trigger.TriggerType TriggerType { get; set; }
         public Animations.AnimationType AnimationType { get; protected set; }
+        public abstract event Action AnimationBeginned;
         public abstract event Action AnimationEnded;
         public abstract event Action AnimationSkipped;
         
@@ -24,7 +25,7 @@ namespace UIEngine
 
         public virtual void Play()
         {
-
+            
         }
 
         public virtual void Skip()
