@@ -5,7 +5,6 @@ namespace UIEngine.Animations.Emphasis
 {
     public class SpinAni : EmphasisAnimation
     {
-        public override event Action AnimationBeginned;
         public override event Action AnimationEnded;
         public override event Action AnimationSkipped;
         public override event Action<bool> TimerEnableChanged;
@@ -28,7 +27,7 @@ namespace UIEngine.Animations.Emphasis
 
                 Parent.Rotation = _originalRot + spin * 360f * (float)(Duration - (int)_elapsed) / (float)Duration;
                 _elapsed += (uint)((Timer)sender).Interval;
-                System.Diagnostics.Debug.WriteLine("IN" + _elapsed);
+                //System.Diagnostics.Debug.WriteLine("IN" + _elapsed);
 
             };
         }
@@ -36,7 +35,6 @@ namespace UIEngine.Animations.Emphasis
         public override void Play()
         {
             base.Play();
-            AnimationBeginned?.Invoke();
             TimerNeeded = true;
             TimerEnableChanged?.Invoke(true);
         }

@@ -5,7 +5,6 @@ namespace UIEngine.Animations.Exit
 {
     public class FadeOutAni : ExitAnimation
     {
-        public override event Action AnimationBeginned;
         public override event Action AnimationEnded;
         public override event Action AnimationSkipped;
         public override event Action<bool> TimerEnableChanged;
@@ -27,7 +26,7 @@ namespace UIEngine.Animations.Exit
 
                 //if (_elapsed == Duration) System.Diagnostics.Debugger.Break();
                 Parent.Fill.Transparency = (float)(Duration - (int)_elapsed) / (float)Duration;
-                System.Diagnostics.Debug.WriteLine("OUT" + _elapsed);
+                //System.Diagnostics.Debug.WriteLine("OUT" + _elapsed);
 
                 _elapsed += (uint)((Timer)sender).Interval;
             };
@@ -37,7 +36,6 @@ namespace UIEngine.Animations.Exit
         public override void Play()
         {
             base.Play();
-            AnimationBeginned?.Invoke();
             TimerNeeded = true;
             TimerEnableChanged?.Invoke(true);
         }

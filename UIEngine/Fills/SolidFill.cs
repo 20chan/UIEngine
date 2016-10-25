@@ -20,7 +20,9 @@ namespace UIEngine.Fills
         public override float Transparency
         {
             get { return (float)this.Color.A / (float)byte.MaxValue; }
-            set { this.Color = Color.FromArgb((int)(value * 255), this.Color); System.Diagnostics.Debug.WriteLine(Color); }
+            set { this.Color = Color.FromArgb((int)(value * 255), this.Color);
+                //System.Diagnostics.Debug.WriteLine(Color);
+            }
         }
         
         public SolidFill(Color color, float transparency = 1f)
@@ -41,7 +43,7 @@ namespace UIEngine.Fills
         public override void DrawString(Graphics g, string text, Font font, Rectangle bound)
         {
             g.DrawString(text, font, _pen.Brush, bound);
-            System.Diagnostics.Debug.WriteLine("DRAW : " + _pen.Color);
+            //System.Diagnostics.Debug.WriteLine("DRAW : " + _pen.Color);
         }
 
         public override void DrawPoligon(Graphics g, Point[] points)

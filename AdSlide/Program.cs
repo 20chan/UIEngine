@@ -32,7 +32,7 @@ namespace AdSlide
                 FadeInAni imgfadein = new FadeInAni(pic, 1000) { TriggerType = UIEngine.Trigger.TriggerType.AfterPrevious };
                 FadeOutAni imgfadeout = new FadeOutAni(pic, 1000) { TriggerType = UIEngine.Trigger.TriggerType.MouseClick };
                 FadeInAni refade = new FadeInAni(label, 1000) { TriggerType = UIEngine.Trigger.TriggerType.MouseClick };
-                SpinAni spin = new SpinAni(pic, 10000, 10) { TriggerType = UIEngine.Trigger.TriggerType.WithPrevious };
+                SpinAni spin = new SpinAni(pic, 1000, 5) { TriggerType = UIEngine.Trigger.TriggerType.WithPrevious };
                 first.Interfaces.Add(label);
                 first.Interfaces.Add(pic);
 
@@ -57,7 +57,7 @@ namespace AdSlide
                     Font = new Font("Curlz MT", 80f),
                     Fill = new UIEngine.Fills.SolidFill(Color.Blue)
                 };
-                UIPicture pic = new UIPicture(Image.FromFile(@"D:\Image\Logo\haskell.png")) { Position = new Point(0, 0), Size = new Size(600, 400) };
+                UIPicture pic = new UIPicture(Image.FromFile(@"D:\Image\mtn.jpg")) { Position = new Point(0, 0), Size = new Size(600, 400) };
                 FadeInAni fadein = new FadeInAni(label, 1000) { TriggerType = UIEngine.Trigger.TriggerType.WithPrevious };
                 FadeOutAni fadeout = new FadeOutAni(label, 1000) { TriggerType = UIEngine.Trigger.TriggerType.AfterPrevious };
                 FadeInAni imgfadein = new FadeInAni(pic, 1000) { TriggerType = UIEngine.Trigger.TriggerType.WithPrevious };
