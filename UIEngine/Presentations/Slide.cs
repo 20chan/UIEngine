@@ -21,8 +21,7 @@ namespace UIEngine.Presentations
             get { return __curAni; }
             set
             {
-                System.Diagnostics.Debug.WriteLine(Environment.StackTrace);
-                System.Diagnostics.Debug.WriteLine(value);
+                System.Diagnostics.Debug.WriteLine("_curAni changed : " + value);
                 __curAni = value;
             }
         }
@@ -133,8 +132,7 @@ namespace UIEngine.Presentations
                 SkipPlaying();
                 return;
             }
-            
-
+            //
             if (IsAllAnimationsPlayed) throw new InvalidOperationException("No more animations!");
             Animations[_curAni++].Play();
 
